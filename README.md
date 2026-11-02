@@ -42,7 +42,7 @@ The production data is still small (an early-stage SaaS), so this is a sanity ch
 
 ## What I fixed or changed compared with the Node version
 
-- **Page offsets were shifted by 2 characters.** The Node code trimmed the text after it had computed the page positions. I confirmed it on production data: all 228 pages of 3 tenders were off by exactly 2. The Python version recomputes the offsets after trimming, and a test covers it.
+- **Page offsets were shifted by 2 characters.** The Node code trimmed the text after it had computed the page positions. I confirmed it on production data: all 228 pages of 3 tenders were off by exactly 2. The Python version recomputes the offsets after trimming, and a test covers it. After this finding I also fixed the Node code and corrected the stored offsets in production, then checked them again: 228 of 228 pages in place.
 - **ZIP handling is safe.** Paths that try to leave the extraction folder (zip slip) are ignored, and the number of files and the uncompressed size are capped.
 - **The sheet is validated, not just parsed.** A malformed or truncated answer is reported as such instead of being saved silently.
 - **References are measured.** The share of references pointing to real pages is a simple quality metric, and it can be tracked across model or prompt changes.
